@@ -148,6 +148,7 @@ btnLogin.addEventListener('click', function (e) {
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
     }`;
+    //Show UI
     containerApp.style.opacity = 100;
 
     //Clear input fields
@@ -180,4 +181,24 @@ btnTransfer.addEventListener('click', function (e) {
     //Update UI
     updateUI(currentAccount);
   }
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+
+    //Delete Account
+    accounts.splice(index, 1);
+
+    //Hide UI
+    containerApp.style.opacity = 0;
+  }
+  inputClosePin.value = inputCloseUsername.value = '';
 });
